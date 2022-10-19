@@ -21,8 +21,10 @@ import org.jitsi.meet.sdk.JitsiMeetConferenceOptions
 class JitsiMeetPluginActivity : JitsiMeetActivity() {
     companion object {
         @JvmStatic
-        fun launchActivity(context: Context?,
-                           options: JitsiMeetConferenceOptions) {
+        fun launchActivity(
+            context: Context?,
+            options: JitsiMeetConferenceOptions
+        ) {
             var intent = Intent(context, JitsiMeetPluginActivity::class.java).apply {
                 action = "org.jitsi.meet.CONFERENCE"
                 putExtra("JitsiMeetConferenceOptions", options)
@@ -33,19 +35,21 @@ class JitsiMeetPluginActivity : JitsiMeetActivity() {
 
     var onStopCalled: Boolean = false;
 
-    override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean, newConfig: Configuration?) {
+    override fun onPictureInPictureModeChanged(
+        isInPictureInPictureMode: Boolean,
+        newConfig: Configuration?
+    ) {
         super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig)
 
-        if (isInPictureInPictureMode){
+        if (isInPictureInPictureMode) {
             JitsiMeetEventStreamHandler.instance.onPictureInPictureWillEnter()
-        }
-        else {
+        } else {
             JitsiMeetEventStreamHandler.instance.onPictureInPictureTerminated()
         }
 
         if (isInPictureInPictureMode == false && onStopCalled) {
             // Picture-in-Picture mode has been closed, we can (should !) end the call
-            getJitsiView().leave()
+            getJitsiView().dispose()
         }
     }
 
@@ -70,20 +74,29 @@ class JitsiMeetPluginActivity : JitsiMeetActivity() {
     }
 
     override fun onConferenceWillJoin(data: HashMap<String, Any>) {
-        Log.d(JITSI_PLUGIN_TAG, String.format("JitsiMeetPluginActivity.onConferenceWillJoin: %s", data))
+        Log.d(
+            JITSI_PLUGIN_TAG,
+            String.format("JitsiMeetPluginActivity.onConferenceWillJoin: %s", data)
+        )
         JitsiMeetEventStreamHandler.instance.onConferenceWillJoin(data)
         super.onConferenceWillJoin(data)
     }
 
     override fun onConferenceJoined(data: HashMap<String, Any>) {
-        Log.d(JITSI_PLUGIN_TAG, String.format("JitsiMeetPluginActivity.onConferenceJoined: %s", data))
+        Log.d(
+            JITSI_PLUGIN_TAG,
+            String.format("JitsiMeetPluginActivity.onConferenceJoined: %s", data)
+        )
         JitsiMeetEventStreamHandler.instance.onConferenceJoined(data)
         super.onConferenceJoined(data)
     }
 
     override fun onConferenceTerminated(data: HashMap<String, Any>) {
 
-        Log.d(JITSI_PLUGIN_TAG, String.format("JitsiMeetPluginActivity.onConferenceTerminated: %s", data))
+        Log.d(
+            JITSI_PLUGIN_TAG,
+            String.format("JitsiMeetPluginActivity.onConferenceTerminated: %s", data)
+        )
         JitsiMeetEventStreamHandler.instance.onConferenceTerminated(data)
         super.onConferenceTerminated(data)
     }
@@ -105,16 +118,18 @@ class JitsiMeetPluginActivity : JitsiMeetActivity() {
             setTurnScreenOn(true)
 
             // If you want to display the keyguard to prompt the user to unlock the phone:
-            val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-            keyguardManager?.requestDismissKeyguard(this, null)
+            //val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+            //keyguardManager?.requestDismissKeyguard(this, null)
         } else {
             // For older versions, do it as you did before.
-            window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+            window.addFlags(
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
                     or WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
                     or WindowManager.LayoutParams.FLAG_FULLSCREEN
                     or WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
                     or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
-                    or WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON)
+                    or WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON
+            )
         }
     }
 
@@ -124,12 +139,12 @@ class JitsiMeetPluginActivity : JitsiMeetActivity() {
             setTurnScreenOn(false)
         } else {
             window.clearFlags(
-                    WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-                            or WindowManager.LayoutParams.FLAG_FULLSCREEN
-                            or WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
-                            or WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-                            or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
-                            or WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                    or WindowManager.LayoutParams.FLAG_FULLSCREEN
+                    or WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+                    or WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                    or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+                    or WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON
             )
         }
     }

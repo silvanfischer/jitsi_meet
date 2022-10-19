@@ -18,8 +18,17 @@ class FeatureFlagHelper {
     FeatureFlagEnum.PIP_ENABLED: 'pip.enabled',
     FeatureFlagEnum.RAISE_HAND_ENABLED: 'raise-hand.enabled',
     FeatureFlagEnum.RECORDING_ENABLED: 'recording.enabled',
-    FeatureFlagEnum.TILE_VIEW_ENABLED: 'tile-view.enabled',
     FeatureFlagEnum.TOOLBOX_ALWAYS_VISIBLE: 'toolbox.alwaysVisible',
     FeatureFlagEnum.WELCOME_PAGE_ENABLED: 'welcomepage.enabled',
+    FeatureFlagEnum.ANDROID_SCREENSHARING_ENABLED:
+        'android.screensharing.enabled',
+    FeatureFlagEnum.TOOLBOX_ENABLED: 'toolbox.enabled',
+    FeatureFlagEnum.VIDEO_SHARE_BUTTON_ENABLED: 'video-share.enabled',
+    FeatureFlagEnum.OVERFLOW_MENU_ENABLED: 'overflow-menu.enabled',
+    FeatureFlagEnum.KICK_OUT_ENABLED: 'kick-out.enabled',
+    FeatureFlagEnum.IOS_SCREENSHARING_ENABLED: 'ios.screensharing.enabled',
+    FeatureFlagEnum.CONFERENCE_TIMER_ENABLED: 'conference-timer.enabled',
+    FeatureFlagEnum.NOTIFICATIONS_ENABLED: 'notifications.enabled',
+    FeatureFlagEnum.FILMSTRIP: 'filmstrip.enabled',
   };
 }
