@@ -119,6 +119,20 @@ extension JitsiViewController: JitsiMeetViewDelegate {
         mutatedData?.updateValue("onConferenceJoined", forKey: "event")
         self.eventSink?(mutatedData)
     }
+
+    func participantJoined(_ data: [AnyHashable : Any]!) {
+        //        print("PARTICIPANT JOINED")
+        var mutatedData = data
+        mutatedData?.updateValue("onParticipantJoined", forKey: "event")
+        self.eventSink?(mutatedData)
+    }
+
+    func participantLeft(_ data: [AnyHashable : Any]!) {
+        //        print("PARTICIPANT LEFT")
+        var mutatedData = data
+        mutatedData?.updateValue("onParticipantLeft", forKey: "event")
+        self.eventSink?(mutatedData)
+    }
     
     func conferenceTerminated(_ data: [AnyHashable : Any]!) {
         //        print("CONFERENCE TERMINATED")

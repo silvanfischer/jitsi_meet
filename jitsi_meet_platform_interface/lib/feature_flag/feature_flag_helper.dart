@@ -30,5 +30,6 @@ class FeatureFlagHelper {
     FeatureFlagEnum.CONFERENCE_TIMER_ENABLED: 'conference-timer.enabled',
     FeatureFlagEnum.NOTIFICATIONS_ENABLED: 'notifications.enabled',
     FeatureFlagEnum.FILMSTRIP: 'filmstrip.enabled',
+    FeatureFlagEnum.PREJOIN_PAGE_ENABLED: 'prejoinpage.enabled',
   };
 }

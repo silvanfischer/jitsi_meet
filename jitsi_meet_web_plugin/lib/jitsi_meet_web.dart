@@ -63,6 +63,22 @@ class JitsiMeetPlugin extends JitsiMeetPlatform {
         };
         listener.onConferenceJoined?.call(message);
       }));
+      api?.on("videoParticipantJoined", allowInterop((dynamic _message) {
+        // Mapping object according with jitsi external api source code
+        Map<String, dynamic> message = {
+          "name": _message.name,
+          "participantId": _message.participantId,
+          "role": _message.role
+        };
+        listener.onParticipantJoined?.call(message);
+      }));
+      api?.on("videoParticipantLeft", allowInterop((dynamic _message) {
+        // Mapping object according with jitsi external api source code
+        Map<String, dynamic> message = {
+          "participantId": _message.participantId
+        };
+        listener.onParticipantLeft?.call(message);
+      }));
       api?.on("videoConferenceLeft", allowInterop((dynamic _message) {
         // Mapping object according with jitsi external api source code
         Map<String, dynamic> message = {"roomName": _message.roomName};
@@ -128,6 +144,14 @@ class JitsiMeetPlugin extends JitsiMeetPlatform {
     List<String> listeners = [];
     if (jitsiMeetingListener.onConferenceJoined != null) {
       listeners.add("videoConferenceJoined");
+    }
+    ;
+    if (jitsiMeetingListener.onParticipantJoined != null) {
+      listeners.add("videoParticipantJoined");
+    }
+    ;
+    if (jitsiMeetingListener.onParticipantLeft != null) {
+      listeners.add("videoParticipantLeft");
     }
     ;
     if (jitsiMeetingListener.onConferenceTerminated != null) {

@@ -8,7 +8,7 @@ import java.io.Serializable
 /**
  * StreamHandler to listen to conference events and broadcast it back to Flutter
  */
-class JitsiMeetEventStreamHandler private constructor(): EventChannel.StreamHandler, Serializable {
+class JitsiMeetEventStreamHandler private constructor() : EventChannel.StreamHandler, Serializable {
     companion object {
         val instance = JitsiMeetEventStreamHandler()
     }
@@ -37,6 +37,18 @@ class JitsiMeetEventStreamHandler private constructor(): EventChannel.StreamHand
         eventSink?.success(data)
     }
 
+    fun onParticipantJoined(data: MutableMap<String, Any>?) {
+        Log.d(JITSI_PLUGIN_TAG, "JitsiMeetEventStreamHandler.onParticipantJoined")
+        data?.put("event", "onParticipantJoined")
+        eventSink?.success(data)
+    }
+
+    fun onParticipantLeft(data: MutableMap<String, Any>?) {
+        Log.d(JITSI_PLUGIN_TAG, "JitsiMeetEventStreamHandler.onParticipantLeft")
+        data?.put("event", "onParticipantLeft")
+        eventSink?.success(data)
+    }
+
     fun onConferenceTerminated(data: MutableMap<String, Any>?) {
         Log.d(JITSI_PLUGIN_TAG, "JitsiMeetEventStreamHandler.onConferenceTerminated")
         data?.put("event", "onConferenceTerminated")
@@ -45,18 +57,15 @@ class JitsiMeetEventStreamHandler private constructor(): EventChannel.StreamHand
 
     fun onPictureInPictureWillEnter() {
         Log.d(JITSI_PLUGIN_TAG, "JitsiMeetEventStreamHandler.onPictureInPictureWillEnter")
-        var data : HashMap<String, String>
-                = HashMap<String, String> ()
+        var data: HashMap<String, String> = HashMap<String, String>()
         data?.put("event", "onPictureInPictureWillEnter")
         eventSink?.success(data)
     }
 
     fun onPictureInPictureTerminated() {
         Log.d(JITSI_PLUGIN_TAG, "JitsiMeetEventStreamHandler.onPictureInPictureTerminated")
-        var data : HashMap<String, String>
-                = HashMap<String, String> ()
+        var data: HashMap<String, String> = HashMap<String, String>()
         data?.put("event", "onPictureInPictureTerminated")
         eventSink?.success(data)
     }
-
 }

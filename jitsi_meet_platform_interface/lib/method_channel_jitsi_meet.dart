@@ -121,6 +121,14 @@ class MethodChannelJitsiMeet extends JitsiMeetPlatform {
           if (listener.onConferenceJoined != null)
             listener.onConferenceJoined!(message);
           break;
+        case "onParticipantJoined":
+          if (listener.onParticipantJoined != null)
+            listener.onParticipantJoined!(message);
+          break;
+        case "onParticipantLeft":
+          if (listener.onParticipantLeft != null)
+            listener.onParticipantLeft!(message);
+          break;
         case "onConferenceTerminated":
           if (listener.onConferenceTerminated != null)
             listener.onConferenceTerminated!(message);
@@ -142,6 +150,14 @@ class MethodChannelJitsiMeet extends JitsiMeetPlatform {
         case "onConferenceJoined":
           if (listener.onConferenceJoined != null)
             listener.onConferenceJoined!(message);
+          break;
+        case "onParticipantJoined":
+          if (listener.onParticipantJoined != null)
+            listener.onParticipantJoined!(message);
+          break;
+        case "onParticipantLeft":
+          if (listener.onParticipantLeft != null)
+            listener.onParticipantLeft!(message);
           break;
         case "onConferenceTerminated":
           if (listener.onConferenceTerminated != null)
